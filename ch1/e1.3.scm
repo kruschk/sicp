@@ -1,4 +1,5 @@
 ; Exercise 1.3
+(display "Exercise 1.3\n")
 ; Return the maximum of a and b.
 (define (max a b)
   (if (< a b)
@@ -39,6 +40,6 @@
   (sum-of-squares (middle3 x y z)
                   (max3    x y z)))
 
-(print "Sum of squares of the two largest values: "
-       (sum-squares-two-biggest -1 -2 -3)
-       ".")
+(display "Sum of squares of the two largest values: ")
+(display (sum-squares-two-biggest -1 -2 -3))
+(display ".\n")

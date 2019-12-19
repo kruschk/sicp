@@ -1,4 +1,5 @@
 ; Exercise 1.5
+(display "Exercise 1.5\n")
 (define (p) (p))
 (define (test x y)
   (if (= x 0)

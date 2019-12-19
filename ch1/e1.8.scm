@@ -1,5 +1,5 @@
 ; Exercise 1.8
-(print "Exercise 1.8")
+(display "Exercise 1.8\n")
 (define (cbrt-iter last-guess guess x)
   (if (good-enough? last-guess guess)
       guess
@@ -14,4 +14,4 @@
 (define (cbrt x)
   (cbrt-iter 0.0 1.0 x))
 
-(print "(cbrt 17): " (cbrt 17))
+(display "(cbrt 17): ") (display (cbrt 17)) (newline)

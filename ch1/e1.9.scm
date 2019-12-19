@@ -1,5 +1,5 @@
 ; Exercise 1.9
-(print "Exercise 1.9")
+(display "Exercise 1.9\n")
 ; This recursively-defined procedure describes a recursive process (see below); its state is maintained by the interpreter!
 (define (+ a b)
   (if (= a 0)
