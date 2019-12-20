@@ -1,0 +1,22 @@
+; Exercise 1.14
+(display "Exercise 1.14\n")
+
+(count-change 11)
+(cc 11 5)
+(+ (cc 11 4)
+   (cc -39 5))
+(+ (+ (cc 11 3) 0) 0)
+(+ (+ (+ (cc 11 2) (cc  1 3)) 0) 0)
+(+ (+ (+ (+ (cc 11 1)
+            (cc 6 2))
+         (+ (cc 1 2)
+            (cc -11 3)))
+      0)
+   0)
+
+(display "The orders of growth are as follows (I think):\n")
+(display "- Space: linear, i.e. Theta(n). This process is similar to Fib(n) where you")
+(display "  only need to keep track of the node above you.")
+(display "- Time: exponential, i.e. Theta(k^n)). The number of leaves in the tree (or")
+(display "  how many times we encounter a base/degenerate case) is exponentially")
+(display "  related to the amount of change we want to apply count-change to.")
