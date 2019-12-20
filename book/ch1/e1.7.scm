@@ -1,8 +1,13 @@
 ; Exercise 1.7
 (display "Exercise 1.7\n")
 
-(display "\nWhen finding square roots of very small numbers, the `good-enough?` test will not be very effective because `0.001` is very large relative to the values we're interested in.\n")
-(display "\nWhen finding square roots of very large numbers, the `good-enough?` test will not be very effective because `0.001` is very small relative to the values we're interested in. The test may therefore never be satisfied due to the limited precision of the floating point representation.\n")
+; When finding square roots of very small numbers, the `good-enough?` test will
+; not be very effective because `0.001` is very large relative to the values
+; we're interested in.
+; When finding square roots of very large numbers, the `good-enough?` test will
+; not be very effective because `0.001` is very small relative to the values
+; we're interested in. The test may therefore never be satisfied due to the
+; limited precision of the floating point representation.
 
 ; Define `sqrt`
 (define (average x y)
