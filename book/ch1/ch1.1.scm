@@ -1,6 +1,10 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1 The Elements of Programming
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "1.1 The Elements of Programming\n")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.1 Expressions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.1 Expressions\n")
 (display (+ (* 3 
                (+ (* 2 4)
@@ -8,7 +12,9 @@
             (+ (- 10 7)
                6))) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.2 Naming and the Environment
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.2 Naming and the Environment\n")
 (define size 2)
 (display size) (newline)
@@ -19,13 +25,17 @@
 (define circumference (* 2 pi radius))
 (display circumference) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.3 Evaluating Combinations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.3 Evaluating Combinations\n")
 (display (* (+ 2
                (* 4 6))
             (+ 3 5 7))) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.4 Compound Procedures
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.4 Compound Procedures\n")
 (define (square x) (* x x))
 (display (square 21)) (newline)
@@ -39,7 +49,9 @@
   (sum-of-squares (+ a 1) (* a 2)))
 (display (f 5)) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.5 The Substitution Model for Procedure Application
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.5 The Substitution Model for Procedure Application\n")
 ; Applicative-order evaluation ("evaluate the arguments and then apply")
 ; (f 5)
@@ -58,7 +70,9 @@
 ; `-> (+ 36 100)
 ; `-> 136
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.6 Conditional Expressions and Predicates
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.6 Conditional Expressions and Predicates\n")
 ;(define (abs x)
 ;  (cond ((> x 0) x)
@@ -83,7 +97,9 @@
   (not (< x y)))
 (display (>= 7 1)) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.7 Example: Square Roots by Newton's Method
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.7 Example: Square Roots by Newton's Method\n")
 (define (sqrt-iter guess x)
   (if (good-enough? guess x)
@@ -103,7 +119,9 @@
 (display (sqrt (+ (sqrt 2) (sqrt 3)))) (newline)
 (display (square (sqrt 1000))) (newline)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.1.8 Procedures as Black-Box Abstractions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.1.8 Procedures as Black-Box Abstractions\n")
 ; Hmm... this might clutter our program's namespace
 ;(define (square x) (* x x))

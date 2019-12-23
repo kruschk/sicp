@@ -1,6 +1,11 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.2 Procedures and the Processes They Generate
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "1.2 Procedures and the Processes They Generate\n")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1.2.1 Linear Recursion and Iteration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "\n1.2.1 Linear Recursion and Iteration\n")
 (define (factorial n)
   (cond ((<= n 0) 1)
@@ -30,8 +35,10 @@
 
 (display "(factorial 6): ") (display (factorial 6)) (newline)
 
-; 1.2.2. Tree Recursion
-(display "\n1.2.2. Tree Recursion\n")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.2.2 Tree Recursion
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.2.2 Tree Recursion\n")
 
 (define (fib n)
   (cond ((= 0 n) 0)
@@ -55,7 +62,6 @@
                                  a
                                  (- count 1)))))
   (fib-iter-helper 1 0 n))
-
 (display "(fib-iter 0): ") (display (fib-iter 0)) (newline)
 (display "(fib-iter 1): ") (display (fib-iter 1)) (newline)
 (display "(fib-iter 2): ") (display (fib-iter 2)) (newline)
@@ -67,6 +73,7 @@
 (display "(fib-iter 8): ") (display (fib-iter 8)) (newline)
 
 ; Example: Counting change
+(display "Example: Counting change\n")
 (define (count-change amount)
   (cc amount 5))
 (define (cc amount kinds-of-coins)
@@ -83,7 +90,6 @@
         ((= kinds-of-coins 3) 10)
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
-
 (display (count-change 10)) (newline)
 
 (define (count-change amount)
@@ -99,11 +105,131 @@
     (cond ((= amount 0) 1)
           ((or (< amount 0) (= kinds-of-coins 0)) 0)
           (else ;(display amount) (display " ")
-                ;(display kinds-of-coins) (newline)
-                (+ (cc amount
-                       (- kinds-of-coins 1))
-                   (cc (- amount (first-denomination))
-                       kinds-of-coins)))))
+            ;(display kinds-of-coins) (newline)
+            (+ (cc amount
+                   (- kinds-of-coins 1))
+               (cc (- amount (first-denomination))
+                   kinds-of-coins)))))
   (cc amount 5))
-
 (display (count-change 10)) (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.2.3 Orders of Growth
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.2.3 Orders of Growth\n")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.2.4 Exponentiation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.2.4 Exponentiation\n")
+; Recursive expt process
+(define (expt b n)
+  (if (= n 0)
+      1
+      (* b (expt b (- n 1)))))
+(display (expt 2 10)) (newline)
+
+; Iterative expt process
+(define (expt b n)
+  (expt-iter b n 1))
+(define (expt-iter b counter product)
+  (if (= counter 0)
+      product
+      (expt-iter b
+                 (- counter 1)
+                 (* b product))))
+(display (expt 2 10)) (newline)
+
+; Iterative expt process with block structure and lexical scoping.
+(define (expt b n)
+  (define (expt-iter counter product)
+    (if (= counter 0)
+        product
+        (expt-iter (- counter 1)
+                   (* b product))))
+  (expt-iter n 1))
+(display (expt 2 10)) (newline)
+
+; Recursive fast-expt, which uses successive squaring.
+(define (fast-expt b n)
+  (define (even?)
+    (= (remainder n 2) 0))
+  (cond ((= n 0) 1)
+        ((even?) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1))))))
+(display (fast-expt 2 10)) (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.2.5 Greatest Common Divisors
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.2.5 Greatest Common Divisors\n")
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+(display (gcd 16 28)) (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.2.6 Example: Testing for Primality
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.2.6 Example: Testing for Primality\n")
+; Searching for divisors
+(display "Searching for divisors\n")
+; Simple prime testing (my version):
+(define (smallest-divisor n)
+  (define (divisible-by? a) (= 0 (remainder n a)))
+  (define (helper a)
+    (cond ((> (square a) n) n)
+          ((divisible-by? a) a)
+          (else (helper (+ a 1)))))
+  (helper 2))
+(define (prime? n)
+  (= n (smallest-divisor n)))
+(display (smallest-divisor   6)) (newline)
+(display (smallest-divisor   7)) (newline)
+(display (smallest-divisor 169)) (newline)
+(display (prime?   6)) (newline)
+(display (prime?   7)) (newline)
+(display (prime? 169)) (newline)
+
+; Simple prime testing (book version):
+(define (smallest-divisor n)
+  (find-divisor n 2))
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ test-divisor 1)))))
+(define (divides? a b)
+  (= (remainder b a) 0))
+(define (prime? n)
+  (= n (smallest-divisor n)))
+(display (smallest-divisor   6)) (newline)
+(display (smallest-divisor   7)) (newline)
+(display (smallest-divisor 169)) (newline)
+(display (prime?   6)) (newline)
+(display (prime?   7)) (newline)
+(display (prime? 169)) (newline)
+
+; The Fermat test
+(display "The Fermat test\n")
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp) (remainder (square (expmod base
+                                                (/ exp 2)
+                                                m))
+                                m))
+        (else (remainder (* base (expmod base (- exp 1) m))
+                         m))))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+        ((fermat-test n) (fast-prime? n (- times 1)))
+        (else false)))
+
+(display (fast-prime? 920419823 32)) (newline)

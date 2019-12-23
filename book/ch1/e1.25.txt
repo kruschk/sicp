@@ -1,0 +1,13 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Exercise 1.25
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Alyssa is correct, this method would work fine. The issue is that the result of
+the fast-expt computation may produce extremely large intermediate numbers which
+are immediately discarded. In Scheme, this isn't a big issue since the language
+uses arbitrary-precision arithmetic by default, and can support these large
+numbers. By taking advantage of modular arithmetic in the original
+implementation, we avoid the large memory footprint that would otherwise be
+required. I also expect the modular trick would also be faster, since a
+remainder operation is typically very fast (maybe even natively supported
+natively by hardware) compared to arbitrary-precision arithmetic, which requires
+more memory accesses.

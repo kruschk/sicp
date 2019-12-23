@@ -1,0 +1,26 @@
+; Exercise 4
+
+This tutorial descends from a long line of Emacs tutorials
+starting with the one written by Stuart Cracraft for the original Emacs.
+
+This version of the tutorial, like GNU Emacs, is copyrighted, and
+comes with permission to distribute copies on certain conditions:
+
+Copyright (c) 1985 Free Software Foundation
+
+   Permission is granted to anyone to make or distribute verbatim copies
+   of this document as received, in any medium, provided that the
+   copyright notice and permission notice are preserved,
+   and that the distributor grants the recipient permission
+   for further redistribution as permitted by this notice.
+
+   Permission is granted to distribute modified versions
+   of this document, or of portions of it,
+   under the above conditions, provided also that they
+   carry prominent notices stating who last altered them.
+
+The conditions for copying Emacs itself are slightly different
+but in the same spirit.  Please read the file COPYING and then
+do give copies of GNU Emacs to your friends.
+Help stamp out software obstructionism ("ownership") by using,
+writing, and sharing free software!
