@@ -1,4 +1,7 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 1. Before Turning on your Computer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "1. Before Turning on your Computer\n")
 (display (- 8 9)) (newline) ; Prints -1.
 (display (> 3.7 4.4)) (newline) ; Prints #f.
 (display (- (if (> 3 4) 7 10) (/ 16 10))) (newline) ; (- 10 1.6) -> Prints 8.4.

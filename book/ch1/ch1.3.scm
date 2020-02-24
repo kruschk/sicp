@@ -239,3 +239,84 @@
                1.0))
 (display (sqrt 2.0)) (newline)
 (display (sqrt 3.0)) (newline)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; 1.3.4 Procedures as Returned Values
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(display "\n1.3.4 Procedures as Returned Values\n")
+(define (average-damp f)
+  (define (average x y) (/ (+ x y) 2))
+  (lambda (x) (average x (f x))))
+(display ((average-damp square) 10)) (newline)
+
+; Defining sqrt in terms of fixed-point and average-damp (my implementation).
+(define (sqrt x)
+  (define (f y)
+    (/ x y))
+  (fixed-point (average-damp f)
+               1.0))
+
+; Defining sqrt in terms of fixed-point and average-damp (book's
+; implementation).
+(define (sqrt x)
+  (fixed-point (average-damp (lambda (y) (/ x y)))
+               1.0))
+(display (sqrt 2)) (newline)
+
+; Defining cube-root in terms of fixed-point and average-damp.
+(define (cube-root x)
+  (fixed-point (average-damp (lambda (y) (/ x (square y))))
+               1.0))
+(display (cube-root 27)) (newline)
+
+; Approximating the derivative of a function g.
+(define (deriv g)
+  (let ((dx 0.00001))
+    (lambda (x) (/ (- (g (+ x dx)) (g x))
+                   dx))))
+(define (cube x) (* x x x))
+(display ((deriv cube) 5)) (newline)
+
+; `sqrt` in terms of `newtons-method` (my implementation)
+(define (sqrt x)
+  (newtons-method (lambda (y) (- (square y) x))
+                  1.0))
+
+; Newton's method (my implementation)
+(define (newtons-method g guess)
+  (define (f x) (- x (/ (g x) ((deriv g) x))))
+  (fixed-point f guess))
+(display (sqrt 2)) (newline)
+
+; Newton's method (book's implementation)
+(define (newton-transform g)
+  (lambda (x)
+    (- x (/ (g x) ((deriv g) x)))))
+(define (newtons-method g guess)
+  (fixed-point (newton-transform g) guess))
+
+; `sqrt` in terms of `newtons-method` (book's implementation)
+(define (sqrt x)
+  (newtons-method (lambda (y) (- (square y) x))
+                  1.0))
+(display (sqrt 2)) (newline)
+
+; Abstractions and first-class procedures
+; Define a general procedure for finding the fixed-point of function `g`, using
+; `transform` to transform it, and `guess` for the initial guess.
+(define (fixed-point-of-transform g transform guess)
+  (fixed-point (transform g) guess))
+
+; `sqrt` in terms of `fixed-point-of-transform` and `average-damp`.
+(define (sqrt x)
+  (fixed-point-of-transform (lambda (y) (/ x y))
+                            average-damp
+                            1.0))
+(display (sqrt 2)) (newline)
+
+; `sqrt` in terms of `fixed-point-of-transform` and `newton-transform`.
+(define (sqrt x)
+  (fixed-point-of-transform (lambda (y) (- (square y) x))
+                            newton-transform
+                            1.0))
+(display (sqrt 2)) (newline)
