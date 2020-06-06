@@ -1,0 +1,22 @@
+Explicit dispatch
+When adding operations or types, new constructors and selectors must be
+created, and care must be taken to ensure each representation uses unique
+identifiers. Additionally, the generic interface procedures must be modified
+so that they are aware of the new operations and types, and can dispatch
+accordingly.
+
+Data-directed
+New operations are added by adding a new row to each table, which requires
+modifying every package. Adding new types, on the other hand, does not
+require changing other packages. To add a type, a new package is created,
+with new constructors and selectors, but it is not necessary to ensure each
+representation uses unique identifiers since the definitions are
+encapsulated within the package. Data-directed style is ideal for a system
+in which new types are added frequently.
+
+Message-passing
+New operations are created by defining a new generic procedure which returns
+a procedure that checks which operand is passed to it and acts accordingly.
+This makes adding operations straightforward, but adding a new type requires
+every generic procedure to be modified. This style is ideal for a system
+which requires new operations to be added often.
