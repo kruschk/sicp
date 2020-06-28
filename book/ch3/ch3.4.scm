@@ -90,7 +90,7 @@
         (d (account 'deposit)))
     ((s d) amount)))
 
-(((account 'serializer) (account 'deposit)) amount)
+;(((account 'serializer) (account 'deposit)) amount)
 
 (define (serialized-exchange account1 account2)
   (let ((serializer1 (account1 'serializer))
