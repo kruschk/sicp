@@ -2,6 +2,7 @@
 ; Exercise 2.8
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "Exercise 2.8\n")
+
 (define (make-interval a b) (cons a b))
 (define (lower-bound interval)
   (car interval))

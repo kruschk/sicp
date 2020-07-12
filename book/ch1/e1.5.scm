@@ -2,12 +2,13 @@
 ; Exercise 1.5
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "Exercise 1.5\n")
+
 (define (p) (p))
 (define (test x y)
   (if (= x 0)
       0
       y))
-(test 0 (p))
+;(test 0 (p))
 
 ; Applicative-order evaluation (evaluate the arguments and then apply):
 ; (test 0 (p))

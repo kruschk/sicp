@@ -2,6 +2,7 @@
 ; Exercise 1.35
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (display "Exercise 1.35\n")
+
 ; The golden ratio is the number that satisfies phi^2 = phi + 1. Dividing both
 ; sides by phi yields phi = 1 + 1/phi. Since a fixed point of a function is a
 ; number x such that f(x) = x, we can define f(phi) = phi = 1 + 1/phi and apply

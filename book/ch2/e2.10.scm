@@ -15,4 +15,4 @@
                       (make-interval (/ 1.0 (upper-bound y))
                                      (/ 1.0 (lower-bound y)))))))
 
-(display (div-interval (make-interval 1 5) (make-interval -1 1))) (newline)
+;(display (div-interval (make-interval 1 5) (make-interval -1 1))) (newline)

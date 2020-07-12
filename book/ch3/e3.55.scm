@@ -15,4 +15,4 @@
   (cons-stream (stream-car s)
                (add-streams (stream-cdr s) (partial-sums s))))
 
-(stream-display (partial-sums integers))
+;(stream-display (partial-sums integers))
