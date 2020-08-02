@@ -104,9 +104,9 @@
 (display "\n4.1.2 Representing Expressions\n")
 
 (define (self-evaluating? exp)
-  (cond ((number? exp) true)
-        ((string? exp) true)
-        (else false)))
+  (cond ((number? exp) #t)
+        ((string? exp) #t)
+        (else #f)))
 
 (define (variable? exp) (symbol? exp))
 
@@ -118,7 +118,7 @@
 (define (tagged-list? exp tag)
   (if (pair? exp)
       (eq? (car exp) tag)
-      false))
+      #f))
 
 (define (assignment? exp)
   (tagged-list? exp 'set!))
@@ -132,7 +132,7 @@
       (cadr exp)
       (caadr exp)))
 (define (definition-value exp)
-  (if (sybmol? (cadr exp))
+  (if (symbol? (cadr exp))
       (caddr exp)
       (make-lambda (cdadr exp)   ; formal parameters
                    (cddr exp)))) ; body
@@ -181,7 +181,7 @@
 (define (cond-clauses exp) (cdr exp))
 (define (cond-else-clause? clause)
   (eq? (cond-predicate clause) 'else))
-(define (cond-predicate-clause) (car clause))
+(define (cond-predicate clause) (car clause))
 (define (cond-actions clause) (cdr clause))
 (define (cond->if exp)
   (expand-clauses (cond-clauses exp)))
@@ -208,9 +208,9 @@
 (display "\nTesting of predicates\n")
 
 (define (true? x)
-  (not (eq? x false)))
+  (not (eq? x #f)))
 (define (false? x)
-  (eq? x false))
+  (eq? x #f))
 
 ; Representing procedures
 (display "\nRepresenting procedures\n")
@@ -260,7 +260,7 @@
                 (frame-values frame)))))
   (env-loop env))
 
-(define (set-variable-value var val env)
+(define (set-variable-value! var val env)
   (define (env-loop env)
     (define (scan vars vals)
       (cond ((null? vars)
@@ -308,8 +308,8 @@
           (extend-environment (primitive-procedure-names)
                               (primitive-procedure-objects)
                               the-empty-environment)))
-    (define-variable! 'true true initial-env)
-    (define-variable! 'false false initial-env)
+    (define-variable! 'true #t initial-env)
+    (define-variable! 'false #f initial-env)
     initial-env))
 (define the-global-environment (setup-environment))
 
@@ -317,17 +317,18 @@
   (tagged-list? proc 'primitive))
 (define (primitive-implementation proc) (cadr proc))
 
-;(define primitive-procedures
-;  (list (list 'car car)
-;        (list 'cdr cdr)
-;        (list 'cons cons)
-;        (list 'null? null?)
-;        ; <more primitives>))
-;(define (primitive-procedure-names)
-;  (map car primitive-procedures))
-;(define (primitive-procedure-objects)
-;  (map (lambda (proc) (list 'primitive (cadr proc)))
-;       primitive-procedures))
+(define primitive-procedures
+  (list (list 'car car)
+        (list 'cdr cdr)
+        (list 'cons cons)
+        (list 'null? null?)
+        ; <more primitives>
+        ))
+(define (primitive-procedure-names)
+  (map car primitive-procedures))
+(define (primitive-procedure-objects)
+  (map (lambda (proc) (list 'primitive (cadr proc)))
+       primitive-procedures))
 
 (define (apply-primitive-procedure proc args)
   (apply-in-underlying-scheme (primitive-implementation proc) args))
@@ -376,11 +377,11 @@
 (define (f x)
   (define (even? n)
     (if (= n 0)
-        true
+        #t
         (odd? (- n 1))))
   (define (odd? n)
     (if (= n 0)
-        false
+        #f
         (even? (- n 1))))
   '(<rest of body of f>))
 
@@ -450,7 +451,7 @@
 (define (analyze-if exp)
   (let ((pproc (analyze (if-predicate exp)))
         (cproc (analyze (if-consequent exp)))
-        (aproc (analyze (if-alternate exp))))
+        (aproc (analyze (if-alternative exp))))
     (lambda (env)
       (if (true? (pproc env))
           (cproc env)
