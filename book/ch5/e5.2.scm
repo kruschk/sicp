@@ -21,13 +21,13 @@
               (+ counter 1))))
   (iter 1 1))
 
-(controller
-  (assign product (const 1))
-  (assign counter (const 1))
-  test-count
-  (test (op >) (reg counter) (reg n))
-  (branch (label fact-done))
-  (assign product (op *) (reg counter) (reg product))
-  (assign counter (op +) (reg counter) (const 1))
-  (goto (label test-count))
-  fact-done) ; result is in `product` register
+;(controller
+;  (assign product (const 1))
+;  (assign counter (const 1))
+;  test-count
+;  (test (op >) (reg counter) (reg n))
+;  (branch (label fact-done))
+;  (assign product (op *) (reg counter) (reg product))
+;  (assign counter (op +) (reg counter) (const 1))
+;  (goto (label test-count))
+;  fact-done) ; result is in `product` register
